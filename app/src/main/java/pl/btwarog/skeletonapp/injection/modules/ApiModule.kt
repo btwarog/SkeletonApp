@@ -89,7 +89,7 @@ open class ApiModule {
                 .build()
     }
 
-    private fun getBaseUrl(context: Context): String {
+    protected open fun getBaseUrl(context: Context): String {
         return context.getString(R.string.API_ENDPOINT)
     }
 
