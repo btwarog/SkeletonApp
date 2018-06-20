@@ -1,32 +1,156 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 
 android {
-    compileSdkVersion 28
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+    buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
     defaultConfig {
-        applicationId "pl.btwarog.skeletonapp"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        applicationId globalConfiguration["androidApplicationId"]
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+        versionCode globalConfiguration["androidVersionCode"]
+        versionName globalConfiguration["androidVersionName"]
+        testInstrumentationRunner "androidx.userRepos.runner.AndroidJUnitRunner"
     }
+
+
     buildTypes {
-        release {
+
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testCoverageEnabled true
+        }
+
+        release {
+            lintOptions {
+                checkReleaseBuilds false
+            }
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testCoverageEnabled false
+        }
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    packagingOptions {
+        pickFirst 'protobuf.meta'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/services/com.fasterxml.jackson.core.JsonFactory'
+        exclude 'project.properties'
+        exclude 'META-INF/INDEX.LIST'
+    }
+
+    kapt {
+        correctErrorTypes = true
+        useBuildCache = true
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "sekeletonApp_${variant.name}_${variant.versionCode}.apk"
         }
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha1'
+    // Kotlin
+    implementation mobileDependencies.kotlin
+
+    // UI
+    implementation mobileDependencies.supportV4
+    implementation mobileDependencies.appcompatV7
+    implementation mobileDependencies.design
+    implementation mobileDependencies.constraintLayout
+    implementation(mobileDependencies.glide) {
+        exclude group: "com.android.support"
+    }
+    kapt mobileDependencies.glideCompiler
+
+
+    // JSON
+    implementation mobileDependencies.jacksonCore
+    implementation mobileDependencies.jacksonDatabind
+    implementation mobileDependencies.jacksonAnnotations
+    implementation mobileDependencies.jacksonKotlin
+
+    // Parceler
+    implementation mobileDependencies.parceler
+    kapt mobileDependencies.parcelerCompiler
+
+    // State saving
+    implementation mobileDependencies.icePick
+    kapt mobileDependencies.icePickProcessor
+
+    // Dependency injection
+    implementation mobileDependencies.dagger
+    implementation mobileDependencies.daggerAndroid
+    implementation mobileDependencies.daggerAndroidSupport
+    kapt mobileDependencies.daggerCompiler
+    kapt mobileDependencies.daggerProcessor
+
+    // Nucleus
+    implementation mobileDependencies.nucleus
+    implementation mobileDependencies.nucleusV4
+    implementation mobileDependencies.nucleusV7
+
+    // Networking
+    implementation mobileDependencies.okhttp
+    implementation mobileDependencies.okhttpInterceptor
+    implementation mobileDependencies.retrofit
+    implementation mobileDependencies.retrofitJacksonConverter
+    implementation mobileDependencies.retrofitRx2Adapter
+
+    // Rx
+    implementation mobileDependencies.rxJava
+    implementation mobileDependencies.rxAndroid
+
+    // Logging
+    implementation mobileDependencies.timber
+
+    // Unit Test
+    testImplementation mobileTestDependencies.junit
+    kaptTest mobileTestDependencies.daggerCompiler
+
+
+    // Ui Tests
+    androidTestImplementation mobileUiTestDependencies.junit
+    androidTestImplementation mobileUiTestDependencies.testRules
+    androidTestImplementation(mobileUiTestDependencies.testRunner) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(mobileUiTestDependencies.testRules) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(mobileUiTestDependencies.espressoCore) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(mobileUiTestDependencies.espressoIntents) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(mobileUiTestDependencies.espressoContrib) {
+        exclude module: 'appcompat'
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-v4'
+        exclude module: 'support-v13'
+        exclude module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+        exclude module: 'design'
+    }
+    androidTestImplementation mobileUiTestDependencies.mockitoAndroid
+    androidTestImplementation mobileUiTestDependencies.mockitoKotlin
+    androidTestImplementation mobileUiTestDependencies.restMock
+    androidTestImplementation mobileUiTestDependencies.rx2Idler
+    kaptAndroidTest mobileUiTestDependencies.daggerCompiler
 }

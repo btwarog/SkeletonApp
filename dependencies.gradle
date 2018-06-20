@@ -1,0 +1,106 @@
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+
+ext {
+
+//    Kotlin
+    kotlinVersion = '1.2.50'
+
+//    Android
+    androidBuildToolsVersion = "28.0.0"
+    androidCompileSdkVersion = 28
+    androidMinSdkVersion = 21
+    androidTargetSdkVersion = 28
+    androidVersionCode = 1000000
+    androidVersionName = "1.0.0"
+    androidApplicationId = "pl.btwarog.skeletonapp"
+
+//    Libraries
+    supportLibraryVersion = "27.1.0"
+    constraintLayoutVersion = "1.1.0"
+    rxAndroidVersion = "2.0.2"
+    rxJavaVersion = "2.1.13"
+    retrofitVersion = "2.4.0"
+    okHttpVersion = "3.10.0"
+    jacksonVersion = "2.9.5"
+    jacksonKotlinVersion = "2.9.5"
+    icepickVersion = "3.2.0"
+    daggerVersion = "2.16"
+    nucleusVersion = "7.0.0"
+    parcelerVersion = "1.1.10"
+    fragmentArgs = "3.0.2"
+    timberVersion = "4.7.0"
+    materialDialogsVersion = "0.9.6.0"
+    glideVersion = "4.7.1"
+
+//    Testing
+    espressoVersion = "3.0.1"
+    runnerVersion = '1.0.2'
+    jUnitVersion = '4.12'
+    mockitoAndroidVersion = '2.8.47'
+    mockitoKotlinVersion = '1.5.0'
+    restMockVersion = '0.3.1'
+    rxIdlerVersion = '0.9.0'
+
+    mobileDependencies = [
+            kotlin                  : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+            supportV4               : "com.android.support:support-v4:${supportLibraryVersion}",
+            appcompatV7             : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+            annotations             : "com.android.support:support-annotations:${supportLibraryVersion}",
+            design                  : "com.android.support:design:${supportLibraryVersion}",
+            constraintLayout        : "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
+            materialDialogs         : "com.afollestad.material-dialogs:core:${materialDialogsVersion}",
+            glide                   : "com.github.bumptech.glide:glide:${glideVersion}",
+            glideOkHttpIntegration  : "com.github.bumptech.glide:okhttp3-integration:${glideVersion}",
+            glideCompiler           : "com.github.bumptech.glide:compiler:${glideVersion}",
+            jacksonCore             : "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
+            jacksonDatabind         : "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
+            jacksonAnnotations      : "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}",
+            jacksonKotlin           : "com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonKotlinVersion}",
+            icePick                 : "frankiesardo:icepick:${icepickVersion}",
+            icePickProcessor        : "frankiesardo:icepick-processor:${icepickVersion}",
+            timber                  : "com.jakewharton.timber:timber:${timberVersion}",
+            dagger                  : "com.google.dagger:dagger:${daggerVersion}",
+            daggerAndroid           : "com.google.dagger:dagger-android:${daggerVersion}",
+            daggerAndroidSupport    : "com.google.dagger:dagger-android-support:${daggerVersion}",
+            daggerCompiler          : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            daggerProcessor         : "com.google.dagger:dagger-android-processor:${daggerVersion}",
+            nucleus                 : "info.android15.nucleus5:nucleus:${nucleusVersion}",
+            nucleusV4               : "info.android15.nucleus5:nucleus-support-v4:${nucleusVersion}",
+            nucleusV7               : "info.android15.nucleus5:nucleus-support-v7:${nucleusVersion}",
+            okhttp                  : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            okhttpInterceptor       : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+            retrofit                : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitJacksonConverter: "com.squareup.retrofit2:converter-jackson:${retrofitVersion}",
+            retrofitRx2Adapter      : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            rxJava                  : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid               : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            parceler                : "org.parceler:parceler-api:${parcelerVersion}",
+            parcelerCompiler        : "org.parceler:parceler:${parcelerVersion}",
+    ]
+
+    mobileTestDependencies = [
+            junit         : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
+            daggerCompiler: "com.google.dagger:dagger-compiler:${daggerVersion}",
+    ]
+
+    mobileUiTestDependencies = [
+            junit           : "junit:junit:${jUnitVersion}",
+            testRunner      : "com.android.support.test:runner:${runnerVersion}",
+            testRules       : "com.android.support.test:rules:${runnerVersion}",
+            espressoCore    : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+            espressoIntents : "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
+            espressoContrib : "com.android.support.test.espresso:espresso-contrib:${espressoVersion}",
+            mockitoAndroid  : "org.mockito:mockito-android:${mockitoAndroidVersion}",
+            mockitoKotlin   : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
+            restMock        : "com.github.andrzejchm.RESTMock:android:${restMockVersion}",
+            rx2Idler        : "com.squareup.rx.idler:rx2-idler:${rxIdlerVersion}",
+            daggerCompiler  : "com.google.dagger:dagger-compiler:${daggerVersion}",
+    ]
+
+}
