@@ -93,6 +93,10 @@ dependencies {
     implementation mobileDependencies.icePick
     kapt mobileDependencies.icePickProcessor
 
+    //Cache
+    implementation mobileDependencies.room
+    kapt mobileDependencies.roomCompiler
+
     // Dependency injection
     implementation mobileDependencies.dagger
     implementation mobileDependencies.daggerAndroid
@@ -122,6 +126,7 @@ dependencies {
     // Unit Test
     testImplementation mobileTestDependencies.junit
     kaptTest mobileTestDependencies.daggerCompiler
+
 
 
     // Ui Tests

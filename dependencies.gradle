@@ -37,6 +37,7 @@ ext {
     timberVersion = "4.7.0"
     materialDialogsVersion = "0.9.6.0"
     glideVersion = "4.7.1"
+    roomVersion = "1.0.0"
 
 //    Testing
     espressoVersion = "3.0.1"
@@ -82,6 +83,9 @@ ext {
             rxAndroid               : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             parceler                : "org.parceler:parceler-api:${parcelerVersion}",
             parcelerCompiler        : "org.parceler:parceler:${parcelerVersion}",
+            parcelerCompiler        : "org.parceler:parceler:${parcelerVersion}",
+            room        : "android.arch.persistence.room:runtime:${roomVersion}",
+            roomCompiler        : "android.arch.persistence.room:compiler:${roomVersion}",
     ]
 
     mobileTestDependencies = [
