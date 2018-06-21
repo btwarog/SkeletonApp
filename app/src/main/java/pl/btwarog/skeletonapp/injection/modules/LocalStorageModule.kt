@@ -13,9 +13,9 @@ import javax.inject.Singleton
 @Module
 open class LocalStorageModule {
 
-    @Provides
-    @Singleton
-    internal fun provideAppDatabase(context: Context): AppDatabase {
-        return Room.databaseBuilder(context, AppDatabase::class.java,"skeletonApp.db").build()
-    }
+//    @Provides
+//    @Singleton
+//    internal fun provideAppDatabase(context: Context): AppDatabase {
+//        return Room.databaseBuilder(context, AppDatabase::class.java,"skeletonApp.db").build()
+//    }
 }

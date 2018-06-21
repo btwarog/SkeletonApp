@@ -6,7 +6,6 @@ import android.arch.persistence.room.PrimaryKey
 /**
  * Created by bartlomiej.twarog on 2018-06-20
  */
-@Entity
 data class GithubOwnerModel(
         @PrimaryKey(autoGenerate = false)
         val id: Long,
